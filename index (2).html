@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Valentine's Day ❤️</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(#ffdde1, #ee9ca7);
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #b30047;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+      max-width: 600px;
+      margin: 30px auto;
+    }
+
+    .card {
+      background: #ff4d79;
+      height: 120px;
+      border-radius: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      color: white;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+      display: none;
+    }
+
+    .revealed img {
+      display: block;
+    }
+
+    .revealed span {
+      display: none;
+    }
+
+    #finalMessage {
+      display: none;
+      font-size: 28px;
+      margin-top: 30px;
+      color: #800040;
+    }
+  </style>
+</head>
+<body>
+
+<h1>💌 Tap each heart 💌</h1>
+<p>Unlock the message…</p>
+
+<div class="grid" id="grid"></div>
+
+<div id="finalMessage">
+  ❤️ Happy Valentine’s Day ❤️<br>
+  I love you more than you know.
+</div>
+
+<script>
+  const letters = [
+    "H","A","P","P","Y",
+    "V","A","L","E","N","T","I","N","E","S",
+    "D","A","Y"
+  ];
+
+  const grid = document.getElementById("grid");
+  let revealedCount = 0;
+
+  letters.forEach(letter => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const span = document.createElement("span");
+    span.textContent = "❤️";
+
+    const img = document.createElement("img");
+    img.src = `images/${letter}.jpg`;
+
+    card.appendChild(span);
+    card.appendChild(img);
+
+    card.addEventListener("click", () => {
+      if (!card.classList.contains("revealed")) {
+        card.classList.add("revealed");
+        revealedCount++;
+
+        if (revealedCount === letters.length) {
+          document.getElementById("finalMessage").style.display = "block";
+        }
+      }
+    });
+
+    grid.appendChild(card);
+  });
+</script>
+
+</body>
+</html>
